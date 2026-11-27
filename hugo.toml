@@ -1,0 +1,79 @@
+baseURL = "https://amirhabibzadeh.github.io/blog/"  # CI overrides with the real Pages URL
+title = "وبلاگ امیر حبیب‌زاده"
+defaultContentLanguage = "fa"
+enableRobotsTXT = true
+
+[languages.fa]
+  locale = "fa-IR"
+  direction = "rtl"
+  weight = 1
+
+[pagination]
+  pagerSize = 10
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"
+
+[permalinks.page]
+  posts = "/:contentbasename/"  # file name = URL, same shape as the WordPress posts
+
+[permalinks.term]
+  categories = "/category/:slug/"
+  tags = "/tag/:slug/"
+
+[outputs]
+  home = ["HTML", "RSS", "JSON", "WPFEED"]  # JSON feeds the search page, WPFEED = /feed/
+
+[security]
+  allowContent = ['! ^text/org$']  # posts migrated from WordPress are .html content files
+
+[params]
+  description = "در مورد تجربه‌هام، استارت‌آپ، تکنولوژی و هر آن‌چه که فکر میکنم به درد بخوره مینویسم."
+  author = "امیر حبیب‌زاده"
+  authorBio = "از سال 89 برنامه‌نویسی رو شروع کردم، ساختن رو خیلی دوست دارم. پیگیر بلاک‌چین و غیرمتمرکز سازی هستم."
+  logo = "wp-content/uploads/2021/04/cropped-cropped-amirh-n-1-scaled-1.jpg"
+  # New comments: GitHub Discussions via https://giscus.app (one discussion per post path).
+  [params.giscus]
+    repo = "amirhabibzadeh/blog"
+    repoId = "R_kgDOV-DSvQ"
+    category = "Announcements"
+    categoryId = "DIC_kwDOV-DSvc4DMGPG"
+
+[menus]
+  [[menus.main]]
+    name = "خانه"
+    pageRef = "/"
+    weight = 1
+  [[menus.main]]
+    name = "درباره من"
+    pageRef = "/about"
+    weight = 2
+  [[menus.main]]
+    name = "شخصی"
+    pageRef = "/categories/personal"
+    weight = 3
+  [[menus.main]]
+    name = "تجربه"
+    pageRef = "/categories/experience"
+    weight = 4
+  [[menus.main]]
+    name = "عمومی"
+    pageRef = "/categories/public"
+    weight = 5
+  [[menus.main]]
+    name = "آموزش"
+    pageRef = "/categories/tutorial"
+    weight = 6
+
+# WordPress served RSS at /feed/; GitHub Pages only serves index.html for a directory,
+# so emit the same feed again as feed/index.html for old subscribers.
+[mediaTypes."application/x-wpfeed"]
+  suffixes = ["html"]  # served as /feed/index.html; own type so the HTML minifier leaves the XML alone
+
+[outputFormats.WPFEED]
+  mediaType = "application/x-wpfeed"
+  baseName = "index"
+  path = "feed"
+  isPlainText = true
+  notAlternative = true

@@ -1,0 +1,4 @@
+---
+title: "عمومی"
+slug: public
+---

@@ -1,0 +1,13 @@
+<div class="site-branding">
+  <div class="site-logo"><a href="{{ "" | relURL }}" class="custom-logo-link" rel="home"><img width="190" height="190" src="{{ site.Params.logo | relURL }}" class="custom-logo" alt="{{ site.Title }}"></a></div>
+  {{ if .IsHome }}<h1 class="site-title">{{ else }}<p class="site-title">{{ end }}<a href="{{ "" | relURL }}" rel="home">{{ site.Title }}</a>{{ if .IsHome }}</h1>{{ else }}</p>{{ end }}
+  <p class="site-description">{{ site.Params.description }}</p>
+  <nav id="site-navigation" class="main-navigation" aria-label="فهرست بالا">
+    <div class="menu-container"><ul class="main-menu">
+      {{ $cur := . }}
+      {{ range site.Menus.main }}
+      <li class="menu-item{{ if or ($cur.IsMenuCurrent "main" .) (eq (strings.TrimSuffix "/" $cur.RelPermalink) (strings.TrimSuffix "/" .URL)) }} current-menu-item{{ end }}"><a href="{{ .URL }}">{{ .Name }}</a></li>
+      {{ end }}
+    </ul></div>
+  </nav>
+</div>

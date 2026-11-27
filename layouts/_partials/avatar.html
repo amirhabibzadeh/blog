@@ -1,0 +1,1 @@
+{{- with .avatarUrl }}{{ strings.TrimPrefix "/" . | relURL }}{{ else }}https://secure.gravatar.com/avatar/{{ .avatar }}?s=60&d=mm&r=g{{ end -}}

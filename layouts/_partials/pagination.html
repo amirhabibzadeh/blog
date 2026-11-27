@@ -1,0 +1,13 @@
+{{ $p := .Paginator }}
+{{ if gt $p.TotalPages 1 }}
+<nav class="navigation pagination" aria-label="صفحه‌بندی نوشته‌ها">
+  <h2 class="screen-reader-text">صفحه‌بندی نوشته‌ها</h2>
+  <div class="nav-links">
+    {{ with $p.Prev }}<a class="prev page-numbers" href="{{ .URL }}">{{ partial "icon.html" "chevron_right" }} <span class="nav-prev-text">نوشته‌های جدیدتر</span></a>{{ end }}
+    {{ range $p.Pagers }}
+      {{ if eq . $p }}<span aria-current="page" class="page-numbers current">{{ .PageNumber }}</span>{{ else }}<a class="page-numbers" href="{{ .URL }}">{{ .PageNumber }}</a>{{ end }}
+    {{ end }}
+    {{ with $p.Next }}<a class="next page-numbers" href="{{ .URL }}"><span class="nav-next-text">نوشته‌های قدیمی‌تر</span> {{ partial "icon.html" "chevron_left" }}</a>{{ end }}
+  </div>
+</nav>
+{{ end }}

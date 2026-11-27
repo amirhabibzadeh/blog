@@ -1,0 +1,7 @@
+{{ define "main" }}
+<div class="error-404 not-found">
+  <header class="page-header"><h1 class="page-title">اوه! آن صفحه پیدا نشد.</h1></header>
+  <div class="page-content"><p>به نظر می‌رسد چیزی در این مکان یافت نشد. شاید جستجو کمک کند؟</p>
+  <form role="search" method="get" class="search-form" action="{{ "search/" | relURL }}"><input type="search" class="search-field" placeholder="جستجو …" name="s"> <input type="submit" class="search-submit" value="جستجو"></form></div>
+</div>
+{{ end }}

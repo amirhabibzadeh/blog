@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="fa-IR" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ if .IsHome }}{{ site.Title }} - {{ site.Params.description }}{{ else }}{{ .Title }} - {{ site.Title }}{{ end }}</title>
+<meta name="description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary | plainify | truncate 160 }}{{ else }}{{ site.Params.description }}{{ end }}{{ end }}">
+<link rel="canonical" href="{{ .Permalink }}">
+{{ with .OutputFormats.Get "rss" }}<link rel="alternate" type="application/rss+xml" title="{{ site.Title }}" href="{{ .Permalink }}">{{ end }}
+<meta property="og:title" content="{{ .Title }}">
+<meta property="og:url" content="{{ .Permalink }}">
+{{ with .Params.cover.image }}<meta property="og:image" content="{{ strings.TrimPrefix "/" . | absURL }}">{{ end }}
+<link rel="icon" href="{{ site.Params.logo | relURL }}">
+<link rel="preload" href="{{ "fonts/Vazirmatn-Regular.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="{{ "css/twentynineteen-rtl.css" | relURL }}">
+<link rel="stylesheet" href="{{ "css/wp-extra.css" | relURL }}">
+<link rel="stylesheet" href="{{ "css/site.css" | relURL }}">
+</head>
+<body class="rtl {{ block "bodyclass" . }}hfeed{{ end }} wp-custom-logo wp-embed-responsive image-filters-enabled">
+<div id="page" class="site">
+  <a class="skip-link screen-reader-text" href="#content">رفتن به محتوا</a>
+  {{ block "header" . }}
+  <header id="masthead" class="site-header">
+    <div class="site-branding-container">{{ partial "branding.html" . }}</div>
+  </header>
+  {{ end }}
+  <div id="content" class="site-content">
+    <div id="primary" class="content-area">
+      <main id="main" class="site-main">
+        {{ block "main" . }}{{ end }}
+      </main>
+    </div>
+  </div>
+  {{ partial "footer.html" . }}
+</div>
+</body>
+</html>

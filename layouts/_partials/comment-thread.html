@@ -1,0 +1,21 @@
+{{- $ctx := . }}
+{{- range where .all "parent" .parent }}
+<li id="comment-{{ .id }}" class="comment depth-{{ $ctx.depth }}">
+  <article id="div-comment-{{ .id }}" class="comment-body">
+    <footer class="comment-meta">
+      <div class="comment-author vcard">
+        <img alt="" src="{{ partial "avatar.html" . }}" class="avatar avatar-60 photo" height="60" width="60" loading="lazy">
+        <b class="fn">{{ if .url }}<a href="{{ .url }}" rel="external nofollow ugc" class="url">{{ .author }}</a>{{ else }}{{ .author }}{{ end }}</b> <span class="screen-reader-text says">می گوید:</span>
+      </div>
+      <div class="comment-metadata">
+        <a href="{{ $ctx.page.RelPermalink }}#comment-{{ .id }}"><time datetime="{{ .date }}">{{ partial "date.html" (time .date) }}</time></a>{{ if hasPrefix .id "vg-" }} · ویرگول{{ end }}
+      </div>
+    </footer>
+    <div class="comment-content">{{ partial "fixurls.html" .content }}</div>
+  </article>
+  {{- $kids := where $ctx.all "parent" .id }}
+  {{- if $kids }}
+  <ol class="children">{{ partial "comment-thread.html" (dict "all" $ctx.all "parent" .id "depth" (add $ctx.depth 1) "page" $ctx.page) }}</ol>
+  {{- end }}
+</li>
+{{- end }}

@@ -1,0 +1,5 @@
+{{ define "bodyclass" }}home blog hfeed{{ end }}
+{{ define "main" }}
+{{ range (.Paginate (where site.RegularPages "Section" "posts")).Pages }}{{ partial "entry-summary.html" . }}{{ end }}
+{{ partial "pagination.html" . }}
+{{ end }}

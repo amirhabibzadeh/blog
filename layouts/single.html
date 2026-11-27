@@ -1,0 +1,43 @@
+{{ define "bodyclass" }}{{ if eq .Section "posts" }}single single-post{{ else }}page{{ end }} singular{{ end }}
+{{ define "header" }}
+<header id="masthead" class="site-header{{ if .Params.cover.image }} featured-image{{ end }}">
+  <div class="site-branding-container">{{ partial "branding.html" . }}</div>
+  {{ with .Params.cover.image }}
+  <div class="site-featured-image">
+    <figure class="post-thumbnail"><img src="{{ strings.TrimPrefix "/" . | relURL }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt=""></figure>
+    <div class="entry-header">
+      <h1 class="entry-title">{{ $.Title }}</h1>
+      <div class="entry-meta">{{ partial "entry-meta.html" $ }}</div>
+    </div>
+  </div>
+  {{ end }}
+</header>
+{{ end }}
+{{ define "main" }}
+<article id="post-{{ .Params.wpid }}" class="entry{{ with .Params.cover.image }} has-post-thumbnail{{ end }}">
+  {{ if not .Params.cover.image }}
+  <header class="entry-header">
+    <h1 class="entry-title">{{ .Title }}</h1>
+    {{ if eq .Section "posts" }}<div class="entry-meta">{{ partial "entry-meta.html" . }}</div>{{ end }}
+  </header>
+  {{ end }}
+  <div class="entry-content">{{ partial "fixurls.html" .Content }}</div>
+  {{ if eq .Section "posts" }}
+  <footer class="entry-footer">{{ partial "entry-meta.html" . }}</footer>
+  <div class="author-bio">
+    <h2 class="author-title"><span class="author-heading">از {{ site.Params.author }}</span></h2>
+    <p class="author-description">{{ site.Params.authorBio }} <a class="author-link" href="{{ "about/" | relURL }}" rel="author">دیدن نوشته‌های بیشتر</a></p>
+  </div>
+  {{ end }}
+</article>
+{{ if eq .Section "posts" }}
+<nav class="navigation post-navigation" aria-label="نوشته‌ها">
+  <h2 class="screen-reader-text">راهبری نوشته</h2>
+  <div class="nav-links">
+    {{ with .PrevInSection }}<div class="nav-previous"><a href="{{ .RelPermalink }}" rel="prev"><span class="meta-nav" aria-hidden="true">نوشته‌ٔ قبلی</span> <span class="screen-reader-text">نوشتهٔ قبلی:</span> <br><span class="post-title">{{ .Title }}</span></a></div>{{ end }}
+    {{ with .NextInSection }}<div class="nav-next"><a href="{{ .RelPermalink }}" rel="next"><span class="meta-nav" aria-hidden="true">نوشته‌ٔ بعدی</span> <span class="screen-reader-text">نوشتهٔ بعدی:</span> <br><span class="post-title">{{ .Title }}</span></a></div>{{ end }}
+  </div>
+</nav>
+{{ end }}
+{{ if .Params.wpid }}{{ partial "comments.html" . }}{{ end }}
+{{ end }}

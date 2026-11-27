@@ -1,0 +1,42 @@
+<footer id="colophon" class="site-footer">
+  <aside class="widget-area" aria-label="پابرگ">
+    <div class="widget-column footer-widget-1">
+      <section class="widget widget_search">
+        <h2 class="widget-title">جستجو</h2>
+        <form role="search" method="get" class="search-form" action="{{ "search/" | relURL }}">
+          <label><span class="screen-reader-text">جستجو برای:</span>
+            <input type="search" class="search-field" placeholder="جستجو …" name="s"></label>
+          <input type="submit" class="search-submit" value="جستجو">
+        </form>
+      </section>
+      <section class="widget widget_recent_comments">
+        <h2 class="widget-title">آخرین نظرات</h2>
+        <nav aria-label="آخرین نظرات"><ul id="recentcomments">
+        {{- $all := slice }}
+        {{- range where site.RegularPages "Params.wpid" "!=" nil }}
+          {{- $page := . }}
+          {{- range partial "comments-for.html" . }}
+            {{- $all = $all | append (dict "date" .date "author" .author "url" .url "id" .id "page" $page) }}
+          {{- end }}
+        {{- end }}
+        {{- /* New comments from Giscus (fetched at build time by tools/fetch-giscus.sh); its discussion title is the page path. */}}
+        {{- range hugo.Data.giscus }}
+          {{- $path := strings.Trim .path "/" }}
+          {{- $c := . }}
+          {{- range site.Pages }}
+            {{- if and .Params.wpid (eq (strings.Trim .RelPermalink "/") $path) }}
+              {{- $all = $all | append (dict "date" $c.date "author" $c.author "url" $c.authorUrl "link" (printf "%s#comments" .RelPermalink) "page" .) }}
+            {{- end }}
+          {{- end }}
+        {{- end }}
+        {{- range first 5 (sort $all "date" "desc") }}
+          <li class="recentcomments"><span class="comment-author-link">{{ if .url }}<a href="{{ .url }}" class="url" rel="ugc external nofollow">{{ .author }}</a>{{ else }}{{ .author }}{{ end }}</span> در <a href="{{ with .link }}{{ . }}{{ else }}{{ .page.RelPermalink }}#comment-{{ .id }}{{ end }}">{{ .page.Title }}</a></li>
+        {{- end }}
+        </ul></nav>
+      </section>
+    </div>
+  </aside>
+  <div class="site-info">
+    <a class="site-name" href="{{ "" | relURL }}" rel="home">{{ site.Title }}</a>
+  </div>
+</footer>

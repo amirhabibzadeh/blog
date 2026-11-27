@@ -1,0 +1,4 @@
+---
+title: "شخصی"
+slug: personal
+---

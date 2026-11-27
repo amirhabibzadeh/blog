@@ -1,0 +1,26 @@
+{{ define "bodyclass" }}search search-results hfeed{{ end }}
+{{ define "main" }}
+<header class="page-header">
+  <h1 class="page-title">نتایج جستجو برای:<span class="page-description" id="q"></span></h1>
+</header>
+<div id="results"></div>
+<script>
+(async () => {
+  const q = (new URLSearchParams(location.search).get('s') || '').trim();
+  document.getElementById('q').textContent = q;
+  document.querySelectorAll('.search-field').forEach(i => i.value = q);
+  const box = document.getElementById('results');
+  if (!q) return;
+  const words = q.toLowerCase().split(/\s+/);
+  const posts = await (await fetch('{{ "index.json" | relURL }}')).json();
+  const hits = posts.filter(p => words.every(w => (p.title + ' ' + p.text).toLowerCase().includes(w)));
+  const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  box.innerHTML = hits.length ? hits.map(p => {
+    const i = p.text.toLowerCase().indexOf(words[0]);
+    const snip = p.text.slice(Math.max(0, i - 80), i + 200);
+    return `<article class="entry"><header class="entry-header"><h2 class="entry-title"><a href="${p.url}">${esc(p.title)}</a></h2></header>
+      <div class="entry-content"><p>…${esc(snip)}…</p></div><footer class="entry-footer"><span class="posted-on">${esc(p.date)}</span></footer></article>`;
+  }).join('') : '<article class="entry"><div class="entry-content"><p>متاسفانه، هیچ نتیجه‌ای پیدا نشد. لطفا با کلمات کلیدی دیگری دوباره جستجو کنید.</p></div></article>';
+})();
+</script>
+{{ end }}

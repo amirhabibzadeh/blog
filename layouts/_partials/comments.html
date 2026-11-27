@@ -1,0 +1,27 @@
+{{ $list := partial "comments-for.html" . }}
+<div id="comments" class="comments-area">
+  <div class="comments-title-wrap{{ if not $list }} no-responses{{ end }}">
+    <h2 class="comments-title">{{ if $list }}گفتگو کنید{{ else }}نظر دهید{{ end }}</h2>
+    {{ with $list }}
+    <div class="discussion-meta">
+      <ol class="discussion-avatar-list">
+      {{ range first 6 . }}<li><div class="comment-user-avatar comment-author vcard"><img alt="" src="{{ partial "avatar.html" . }}" class="avatar avatar-60 photo" height="60" width="60" loading="lazy"></div></li>{{ end }}
+      </ol>
+      <p class="discussion-meta-info">{{ partial "icon.html" "comment" }}<span>{{ len . }} نظر</span></p>
+    </div>
+    {{ end }}
+  </div>
+  {{ with $list }}
+  <ol class="comment-list">{{ partial "comment-thread.html" (dict "all" . "parent" "0" "depth" 1 "page" $) }}</ol>
+  {{ end }}
+  {{ with site.Params.giscus }}{{ if .repoId }}
+  <div class="comment-respond">
+  <script src="https://giscus.app/client.js"
+    data-repo="{{ .repo }}" data-repo-id="{{ .repoId }}"
+    data-category="{{ .category }}" data-category-id="{{ .categoryId }}"
+    data-mapping="pathname" data-reactions-enabled="1" data-input-position="top"
+    data-theme="light" data-lang="fa" data-loading="lazy"
+    crossorigin="anonymous" async></script>
+  </div>
+  {{ end }}{{ end }}
+</div>

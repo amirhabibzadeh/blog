@@ -1,0 +1,3 @@
+---
+aliases: ["/newsletter/", "/category/uncategorized/"]
+---

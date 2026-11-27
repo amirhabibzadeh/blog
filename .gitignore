@@ -1,0 +1,5 @@
+*.xml
+/public/
+/resources/
+.hugo_build.lock
+/data/giscus.json

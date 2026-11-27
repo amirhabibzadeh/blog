@@ -1,0 +1,14 @@
+{{ define "bodyclass" }}archive hfeed{{ end }}
+{{ define "main" }}
+<header class="page-header">
+  <h1 class="page-title">{{ if eq .Kind "term" }}{{ if eq .Data.Plural "categories" }}بایگانی دسته:{{ else }}بایگانی برچسب:{{ end }}<span class="page-description">{{ .Title }}</span>{{ else }}{{ .Title }}{{ end }}</h1>
+</header>
+{{ if eq .Kind "taxonomy" }}
+<div class="entry"><div class="entry-content"><ul>
+  {{ range .Data.Terms.ByCount }}<li><a href="{{ .Page.RelPermalink }}">{{ .Page.Title }}</a> ({{ .Count }})</li>{{ end }}
+</ul></div></div>
+{{ else }}
+{{ range .Paginator.Pages }}{{ partial "entry-summary.html" . }}{{ end }}
+{{ partial "pagination.html" . }}
+{{ end }}
+{{ end }}

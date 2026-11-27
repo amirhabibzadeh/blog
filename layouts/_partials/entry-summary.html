@@ -1,0 +1,19 @@
+<article id="post-{{ .Params.wpid }}" class="post type-post status-publish entry{{ with .Params.cover.image }} has-post-thumbnail{{ end }}">
+  <header class="entry-header">
+    <h2 class="entry-title"><a href="{{ .RelPermalink }}" rel="bookmark">{{ .Title }}</a></h2>
+  </header>
+  {{ with .Params.cover.image }}
+  <figure class="post-thumbnail">
+    <a class="post-thumbnail-inner" href="{{ $.RelPermalink }}" aria-hidden="true" tabindex="-1"><img src="{{ strings.TrimPrefix "/" . | relURL }}" class="attachment-post-thumbnail size-post-thumbnail wp-post-image" alt="" loading="lazy"></a>
+  </figure>
+  {{ end }}
+  <div class="entry-content">
+    {{ if strings.Contains .RawContent "<!--more-->" }}
+      {{ partial "fixurls.html" .Summary }}
+      <p><a href="{{ .RelPermalink }}#more" class="more-link">ادامه خواندن<span class="screen-reader-text"> «{{ .Title }}»</span></a></p>
+    {{ else }}
+      {{ partial "fixurls.html" .Content }}
+    {{ end }}
+  </div>
+  <footer class="entry-footer">{{ partial "entry-meta.html" . }}</footer>
+</article>

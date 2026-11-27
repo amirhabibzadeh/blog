@@ -1,0 +1,6 @@
+{{- /* All archived comments for a page: WordPress (data/comments) + Virgool (data/virgool), oldest first. */ -}}
+{{- $id := string (.Params.wpid | default "") -}}
+{{- $l := slice -}}
+{{- with index hugo.Data.comments $id }}{{ $l = $l | append . }}{{ end -}}
+{{- with index hugo.Data.virgool $id }}{{ $l = $l | append . }}{{ end -}}
+{{- return (sort $l "date") -}}

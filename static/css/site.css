@@ -1,0 +1,12 @@
+/* Vazirmatn (successor of Vazir), self-hosted so it loads without Google Fonts. */
+@font-face { font-family: Vazirmatn; src: url(../fonts/Vazirmatn-Light.woff2) format("woff2"); font-weight: 300; font-display: swap; }
+@font-face { font-family: Vazirmatn; src: url(../fonts/Vazirmatn-Regular.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: Vazirmatn; src: url(../fonts/Vazirmatn-Bold.woff2) format("woff2"); font-weight: 700; font-display: swap; }
+body, h1, h2, h3, h4, h5, h6, p, a, li, span, input, button, select, textarea, .entry .entry-meta, .entry .entry-footer, .site-title, .main-navigation, .comment-meta { font-family: Vazirmatn, sans-serif !important; }
+code, pre, kbd { font-family: Menlo, Consolas, monospace !important; direction: ltr; text-align: left; }
+/* Additions on top of the Twenty Nineteen stylesheet for things WordPress used to render. */
+.embed iframe { width: 100%; aspect-ratio: 16 / 9; border: 0; }
+.embed.audio iframe { aspect-ratio: auto; height: 166px; }
+.gallery { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
+.gallery img { width: 100%; height: 140px; object-fit: cover; margin: 0; }
+.comments-area .comment-list .comment-author .avatar { border-radius: 100%; }

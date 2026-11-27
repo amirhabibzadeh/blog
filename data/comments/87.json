@@ -1,0 +1,92 @@
+[
+ {
+  "id": "99",
+  "parent": "0",
+  "author": "ابوالفضل",
+  "url": "",
+  "avatar": "db133f6aff8265987bfde9d976f6efa81cd30a31745322fdffdcf6a1b6e605be",
+  "date": "2014-09-08T13:20:56Z",
+  "content": "<p>الان خیلی آرزو کردی؟ :))))</p>"
+ },
+ {
+  "id": "103",
+  "parent": "99",
+  "author": "امیر",
+  "url": "",
+  "avatar": "cdb8e0a04d9f316391d4054e3f63eba674abfd04cda27a53e9e7f47e91e92971",
+  "date": "2014-09-08T17:56:34Z",
+  "content": "<p>آره چیه پس :D<br />\nبه یه عینک فروشی حتما مراجعه کن.</p>"
+ },
+ {
+  "id": "106",
+  "parent": "0",
+  "author": "Aydın",
+  "url": "",
+  "avatar": "5db121d77eb787b1875e7163f3f7a19e1240eaef907c6b6163aa46f8525d4ee9",
+  "date": "2014-09-08T18:28:35Z",
+  "content": "<p>çox gözel Amir<br />\nyaşa Amir ellerine sağlıq<br />\nTebriz kimi her zaman Qururlu Yaşa<br />\nçox beğendim Amir</p>"
+ },
+ {
+  "id": "107",
+  "parent": "106",
+  "author": "امیر",
+  "url": "",
+  "avatar": "cdb8e0a04d9f316391d4054e3f63eba674abfd04cda27a53e9e7f47e91e92971",
+  "date": "2014-09-08T18:44:55Z",
+  "content": "<p>kishi janimsan , ifitkharimizsan , san mana yorum yazanda da mana gorar daw :)</p>"
+ },
+ {
+  "id": "108",
+  "parent": "107",
+  "author": "Aydın",
+  "url": "",
+  "avatar": "5db121d77eb787b1875e7163f3f7a19e1240eaef907c6b6163aa46f8525d4ee9",
+  "date": "2014-09-08T18:50:20Z",
+  "content": "<p>Sadece Yaşa...</p>"
+ },
+ {
+  "id": "113",
+  "parent": "0",
+  "author": "فرید",
+  "url": "",
+  "avatar": "916ff3862023acb9c29c9d82a9adbf066b3c1c7b097b92a5817715b51d4860f6",
+  "date": "2014-09-09T17:24:02Z",
+  "content": "<p>یاشا امیر جان عالی دی</p>"
+ },
+ {
+  "id": "121",
+  "parent": "0",
+  "author": "Ibrahim Jabbari",
+  "url": "http://ibrahimjabbari.com",
+  "avatar": "c9a5a775643ce97a711743edf35d944f9c8b2bb0f1948a952730a231195478ee",
+  "date": "2014-09-11T03:57:00Z",
+  "content": "<p>Aga Əmir İnşallah gözəl Təbrizimizi əvəl ALLAH sora sizin kimi savadlı və qeyrətli uşaxlarınan dahada abad və dahada gözəl eliyəcayux İnşallah.</p>"
+ },
+ {
+  "id": "131",
+  "parent": "0",
+  "author": "بهنام",
+  "url": "",
+  "avatar": "0f1d0d5cdf3b8a6183cd453925301a4b5855e0186aa426e5d73baf6396a918c9",
+  "date": "2014-09-15T10:52:32Z",
+  "content": "<p>اینکه یه جایی باشه همه متخصصان علاقمند شهر تبریز جمع بشن و بهترین اپلیکیشن هارو تولید کنن و در سطح جهانی عرضه کنه واقعا فوق العاده هستش</p>"
+ },
+ {
+  "id": "229",
+  "parent": "0",
+  "author": "رویا",
+  "url": "",
+  "avatar": "fdf0bf0283878e89c1b38ef83b266210920a6a03257d3eebdcafa95dad7799a6",
+  "date": "2014-12-23T18:19:24Z",
+  "content": "<p>امیر جان ایشالا.. به آرزوهات برسی من نتونستم کلیپ رو گوش کنم.</p>"
+ },
+ {
+  "id": "231",
+  "parent": "0",
+  "author": "بهناز",
+  "url": "",
+  "avatar": "9b8821c10ccad061732b71fbf70fdf88dc3ba7bf46bd639261a8edbb556b3ab5",
+  "date": "2014-12-25T01:00:13Z",
+  "content": "<p>ساغول امیر...تبریز فردا از آن من و توست...پس آرزوهای قشنگت واسه شهر آرزوها رو عملی کن....یاشیسن..</p>"
+ }
+]

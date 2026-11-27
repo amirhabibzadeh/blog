@@ -1,0 +1,132 @@
+---
+title: "چگونه ربات برای تلگرام بنویسیم."
+date: 2015-07-13T05:16:36Z
+url: "/how-to-build-telegram-bot/"
+wpid: 450
+categories: ["tutorial", "personal", "public"]
+tags: ["php", "telegram", "telegram bot", "webhook", "تلگرام", "ربات تلگرام"]
+summary: "در این پست سعی کردم به صورت مختصر و مفید در چهار مرحله طریقه نوشتم ربات برای تلگرام رو آموزش بدم ."
+---
+<p><a href="/wp-content/uploads/2015/07/9ff2f2f01c4bd1b013.png"><img class="aligncenter wp-image-451" src="/wp-content/uploads/2015/07/9ff2f2f01c4bd1b013-1024x1024.png" alt="telegram botFather" width="600" height="600" /></a>یکی از مسنجرهایی که عاشقشم <a title="تلگرام" href="https://telegram.org/" target="_blank">تلگرام</a> هستش . البته درصد دوست داشتن من بعد از مهاجرت ایرانی ها از وایبر یکمی کمتر شده ولی باز هرچی هم باشه بهترین مسنجر دنیاست .</p>
+
+<p>تو این پست قصد دارم آموزش ساخت <a title="پست تلگرام در مورد ربات هایش" href="https://telegram.org/blog/bot-revolution" target="_blank">ربات</a> برای تلگرام رو براتون به صورت مرحله به مرحله یاد بدم .</p>
+
+<p>رباتی که ما خواهیم ساخت قرار نیست کار خاصی بکنه ولی کم کم میتونید بزرگش کنید و کارهای خارق العاده براتون انجام بده .</p>
+
+<!--more-->
+
+<p>خیلی وقت بود میخواستم یه ربات برای تلگرام بنویسم که به دلایل کاری وقت نمیشد . <a title="jadi" href="http://jadi.net" target="_blank">جادی</a> تو یه <a title="jadiBot" href="http://jadi.net/2015/07/telegrambot/" target="_blank">پست</a> رباتی که برای وبلاگش ساخته بودند رو منتشر کرد ، وقتی داشتم کامنتها رو میخوندم متوجه شدم که خیلی ها بلد نیستند چطوری ربات بنویسند .</p>
+
+<p>این شد دلیل ، که بشینم و یه ربات بنویسیم و شمارو با مراحلش آشنا کنم .</p>
+
+<p>خب هی فکر کردم چه رباتی بنویسم هم کوچیک باشه هم به درد بخور که به گروه هایی که عضوشم داشتم فکر میکردم که یهو دیدم چه بهتر از <a title="گروه کاربران لاراول" href="http://laratalks.com/" target="_blank">گروه کاربران لاراول</a> که یه ربات بنویسم و با یه سری کامند ها اطلاعات برگزاری جلسه بعد رو از روی سایت بخونه و نمایش بده .</p>
+
+<p>تلگرام داکیومنت نسبتا خوبی برای بات هاش نوشته و از <a title="telegram bot api documentation" href="https://core.telegram.org/bots/api" target="_blank">اینجا</a> قابل مشاهده هست ولی یه سری چیزها گنگ بود و فک کنم با مطالعه این پست اون ها هم براتون شفاف میشه .<br />
+<h2>مرحله یک : ساخت بات و دریافت توکن اجازه دسترسی (authorization token)</h2><br />
+اولین کار برای اینکه بتونید از ای پی آی های تلگرام استفاده کنید اینه که یه توکن داشته باشید . خب برای اینکه توکن درست کنید دوتا راه وجود داره :</p>
+
+<p><strong>یک :</strong> توی سایت در <a href="https://my.telegram.org/">این لینک</a> ثبت نام کنید و توکن دریافت کنید .</p>
+
+<p><strong>دو :</strong> با استفاده از یکی از ربات های خود تلگرام به اسم (<strong><a title="telegram botFather" href="https://telegram.me/botfather" target="_blank">botFather</a></strong>) توکن دریافت کنید .</p>
+
+<p>که من خودم مرحله دو رو بیشتر پسندیدم و حس کردم راحت تر هست . براتون توضیح میدم .</p>
+
+<p>۱-روی این لینک کلیک کنید :</p>
+
+<p><a href="https://telegram.me/botfather" target="_blank">https://telegram.me/botfather</a></p>
+
+<p>۲-توی مسنجر خودتون این بات نمایش داده میشه . دکمه استارت رو بزنید و لیست کامندهای این بات براتون بیاد  .</p>
+
+<p>لیست کامندها و توضیحات خیلی شفاف هستش<br />
+<pre class="theme:eclipse lang:php decode:true ">/newbot</pre><br />
+<span style="line-height: 1.5;">با این کامند میتونید </span><strong style="line-height: 1.5;">اسم</strong><span style="line-height: 1.5;"> و </span><strong style="line-height: 1.5;">یوزرنیم</strong><span style="line-height: 1.5;"> رباتتون رو اضافه کنید . بعد این کار </span><strong style="line-height: 1.5;">توکن</strong><span style="line-height: 1.5;"> براتون داده میشه .</span></p>
+
+<p>بعد دریافت توکن میتونید از همه متدهای ای پی آی تلگرام استفاده کنید .</p>
+
+<p>تو <a title="telegram API available-methods" href="https://core.telegram.org/bots/api#available-methods" target="_blank">اینجا</a> لیست همه متدهایی که براتون قابل استفاده هست رو مشاهده کنید .</p>
+
+<p>خیلی راحت میتونید <a title="postman" href="https://www.getpostman.com/" target="_blank">postman</a> رو وا کنید و رکویست هایی که میخواید رو بزنید . نحوه استفاده از توکن هم یکم متقاوت هست و  باید ساختار زیر رو برای همه درخواست هاتون باید رعایت کنید .<br />
+<pre class="theme:eclipse lang:php decode:true ">https://api.telegram.org/bot&lt;token&gt;/METHOD_NAME</pre><br />
+&nbsp;</p>
+
+<p>مثلا اگه بخواین اطلاعات رباتتون رو دریافت کنید به صورت زیر درخواست میفرستید.<br />
+<pre class="theme:eclipse lang:php decode:true">https://api.telegram.org/bot123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11/getMe</pre><br />
+<h2>مرحله دو : دریافت پیام ها</h2><br />
+برای دریافت پیام ها در روش وجود داره :<br />
+<h3>یک : استفاده از متد</h3><br />
+می تونید postman رو وا کنید و یه رکویست به این متد <strong>(getUpdates)</strong> بفرستید . مثل مثال زیر :<br />
+<pre class="theme:eclipse lang:php decode:true">https://api.telegram.org/bot104125181:AAHJEMSvcBovhBkVPqaqldNi36SnK9OyhaM/getUpdates</pre><br />
+<p style="text-align: right;">اگه توی لوکال باشید وبخواید ببینید چه پاسخی این متد برای ما بر میگردونه خیلی خوبه ولی اگه بخواید از این متد استفاده کنید ، رباتتون دیگه realtime نیست و هی خودتون باید رکویست بزنید و چک کنید که پیام جدیدی هست تا جواب بدید بهش که طبیعتا یک روش احمقانه و به درد نخور هست .</p></p>
+
+<h3>دو : استفاده از webhook</h3>
+ویکی پدیا وب هوک رو اینجوری تعریف میکنه :
+<blockquote>
+<p style="text-align: left;">A <b>webhook</b> in <a title="Web development" href="https://en.wikipedia.org/wiki/Web_development">web development</a> is a method of augmenting or altering the behavior of a <a title="Web page" href="https://en.wikipedia.org/wiki/Web_page">web page</a>, or <a title="Web application" href="https://en.wikipedia.org/wiki/Web_application">web application</a>, with custom <a title="Callback (computer programming)" href="https://en.wikipedia.org/wiki/Callback_(computer_programming)">callbacks</a>. These callbacks may be maintained, modified, and managed by third-party users and developers who may not necessarily be affiliated with the originating website or application. The term "webhook" was coined by Jeff Lindsay in 2007 from the computer programming term<a title="Hooking" href="https://en.wikipedia.org/wiki/Hooking">Hook</a>.<sup id="cite_ref-1" class="reference"><a href="https://en.wikipedia.org/wiki/Webhook#cite_note-1">[1]</a></sup></p>
+</blockquote>
+<p style="text-align: right;">خب میشه گفت وب هوک یه ایونت هستش که وقتی اتفاقی در سیستم میفته برای url هایی که در سیستم تعریف شده اطلاعات و مقادیری ارسال میشه . که با استفاده از اون مقادیر کاربر شخص ثالث میتونه برنامه نویسی کنه و کارهایی که میخواد رو انجام بده .</p>
+<p style="text-align: right;">بهتر و با مثال برای تلگرام بگم :</p>
+
+<blockquote>
+<p style="text-align: right;">وقتی از متد وب هوک استفاده میکنید دیگه شما نباید هی چک کنید که پیامی برای شما اومده بلکه این تلگرام  هستش که وقتی پیامی برای شما اومد براتون ارسال میکنه و شما فقط کافیه اون دیتا رو بگیرید و هرکاری میخواید رو اون انجام بدید .</p>
+</blockquote>
+<p style="text-align: right;">تلگرام برای اینکه داده ها امن باشه از شما میخواد که از https استفاده کنید و سخت ترین قسمت ماجرا اینجاست که برای یه ربات باید هزینه ssl هم بکنید ولی می تونید از ssl های رایگان استفاده کنید که به لطف کشور عزیزمون شرکت هایی که ssl رایگان میدند برای ایران بسته هستند ولی میتونید از <a title="کلاودفلیر" href="https://www.cloudflare.com" target="_blank">cloudflare</a> استفاده کنید که خیلی راحت هستش کافیه از dns manager کلاود فلیر استفاده کنید و با استفاده از اون بگید که میخوام رو این دامنه و یا زیر دامنه ssl ست باشه .</p>
+<p style="text-align: right;">بعد از اینکه مطمین شدید ssl رو دامنتون فعال شد . میتونید یه رکویست به این متد (<strong>setWebhook</strong>) مثل مثال زیر بزنید :</p>
+
+<pre class="theme:eclipse lang:php decode:true">https://api.telegram.org/bot104125181:AAHJEMSvcBovhBkVPqaqldNi36SnK9OyhaM/setWebhook</pre>
+<p style="text-align: right;">اگه از وب هوک استفاده کنید دیگه متد (getUpdates) براتون غیر فعال میشه .</p>
+<p style="text-align: right;">کافیه توی body مقدار url خودتون که اپتون اونجاست ست کنید . برای حذف وب هوک هم کافیه به همین متد مقدار url رو خالی بزارید و رکوستتون رو ارسال کنید .</p>
+
+<h2 style="text-align: right;">مرحله سوم : تعریف دستور</h2>
+<p style="text-align: right;">ربات شما توی هر گروهی که باشه مثل اعضای اون گروه باهاش رفتار میشه . یعنی هر پیامی که ارسال میشه یه نسخه هم برای ربات شما ارسال میشه . شما میتونید این پیام هارو چک کنید و آنالیز کنید و جوابی متناسب با اون بدید و یا بیخیالش بشید .</p>
+<p style="text-align: right;">ولی یه گزینه تلگرام داره که شما با اون میتونید لیست دستور هایی که ربات شما بهش جواب میده رو مشخص کنید . دستورات رو میتونید با استفاده از botFather و با کامند /setcommands اضافه کنید .</p>
+
+<pre class="theme:eclipse lang:php decode:true">/setcommands</pre>
+<p style="text-align: right;"><span style="line-height: 1.5;">بعد از اجرای این دستور . میگه لیست کامندهاتون و توضیحاتش رو با اینتر و خط تیره جدا کنید و ارسال کنید .</span></p>
+<p style="text-align: right;">پس از ثبت ربات شما توی هر گروهی باشه با زدن اسلش لیست کامندها نمایش داده میشه .</p>
+
+<h2 style="text-align: right;">مرحله چهارم : پردازش پیام و ارسال جواب</h2>
+الان باید منطق برنامتون رو بنویسید .
+
+<p>یعنی با چه پیام و یا دستوری ربات شما باید چیکار کنه .</p>
+
+<p>من چون خودم PHP کار میکنم . دنبال کتابخانه های PHP گشتم و از <a title="telegram api sdk" href="https://github.com/zelenin/telegram-bot-api" target="_blank">این پکیج</a> استفاده کردم . این پکیج کار خاصی نمیکنه . یکمی متدهای ای پی آی تلگرام رو جمع و جور کرده و کلاسش کرده و راحت استفاده میکنید و نیازی نیست یه ساعت تو سایت ببینید که چی به چیه . این پکیج خودش هم با استفاده از <a title="guzzle" href="https://github.com/guzzle/guzzle" target="_blank">گازل</a> رکویست های خودش رو ارسال میکنه .<br />
+<blockquote>یه مسله ای که حتما بهش توجه کنید اینه که پیام به صورت json براتون ارسال میشه . با استفاده کد زیر میتونید پیام رودریافت و به صورت آبجکت استفاده نمایید .</blockquote><br />
+<pre class="theme:eclipse lang:php decode:true ">$update = json_decode(file_get_contents('php://input'));</pre><br />
+مثلا اگه شما تعریف کرده باشید که وقتی دستور /next_event_datetime ارسال شد . بره و از سایت لاراتاکز تاریخ و زمان برگزاری جلسه بعد رو پیدا کنه و به کاربر ارسال کنه . کدش به صورت زیر میشه .</p>
+
+<p>برای گرفتن اطلاعات از سایت موردنظر هم از <a href="https://github.com/sunra/php-simple-html-dom-parser" target="_blank">این پکیج </a> استفاده کردم .</p>
+
+<p>&nbsp;<br />
+<pre class="theme:monokai lang:php decode:true ">&lt;?php
+
+//telegram sdk and configuration
+$client = new Zelenin\Telegram\Bot\Api('someRandomToken');
+
+$update = json_decode(file_get_contents('php://input'));
+
+//your app
+try {
+
+    if($update-&gt;message-&gt;text != '/next_event_datetime')
+        exit;
+    
+    $dom = Sunra\PhpSimple\HtmlDomParser::file_get_html('http://laratalks.com/');
+    $element = $dom-&gt;find('#location header.section-header h3', 0);
+    $dateTime = $element-&gt;plaintext;
+    
+    $response = $client-&gt;sendMessage([
+        'chat_id' =&gt; $update-&gt;message-&gt;chat-&gt;id,
+        'text' =&gt; $dateTime
+    ]);
+
+} catch (\Zelenin\Telegram\Bot\NotOkException $e) {
+
+    //echo error message ot log it
+    //echo $e-&gt;getMessage();
+
+}</pre><br />
+کافیه این کدها رو بسته به نیاز خودتون تغییر بدید .</p>
+
+<p>اینم بات کوچیکی که نوشتم :</p>
+
+<p><a title="ربات گروه کاربران لاراول" href="http://telegram.me/laraTalkBot" target="_blank">http://telegram.me/laraTalkBot</a></p>
